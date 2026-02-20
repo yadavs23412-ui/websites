@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evara Cafe | Student Friendly Café</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #4b3621;
+            --secondary-color: #6f4e37;
+            --accent-color: #d4af37;
+            --bg-color: #fdfbf7;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #f4f4f4;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            transition: 0.3s;
+        }
+
+        /* --- HERO SECTION --- */
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: var(--white);
+        }
+
+        #home h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #b8963b;
+            transform: scale(1.05);
+        }
+
+        /* --- MENU SECTION --- */
+        #menu {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto;
+        }
+
+        .menu-category {
+            margin-bottom: 3rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .menu-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* --- CONTACT SECTION --- */
+        #contact {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 5%;
+        }
+
+        .contact-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .info-item {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-weight: bold;
+            text-align: center;
+            width: fit-content;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .map-container {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            background-color: #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            background-color: #3e2723;
+            color: #aaa;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            #home h1 {
+                font-size: 2rem;
+            }
+            
+            #home p {
+                font-size: 1.1rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">Evara Cafe</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#menu" onclick="toggleMenu()">Menu</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home">
+        <h1>Welcome to Evara Cafe</h1>
+        <p>Taste That Brings Students Together</p>
+        <p style="font-size: 1rem; margin-top: -1rem;">Fresh • Affordable • Delicious</p>
+        <a href="#menu" class="btn">View Menu</a>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu">
+        <h2 class="section-title">Our Menu</h2>
+
+        <!-- Hot Beverages -->
+        <div class="menu-category">
+            <h3>☕ Hot Beverages</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><span class="item-name">Tea</span><span class="item-price">₹15</span></div>
+                <div class="menu-item"><span class="item-name">Black Tea</span><span class="item-price">₹15</span></div>
+                <div class="menu-item"><span class="item-name">Special Tea</span><span class="item-price">₹30</span></div>
+                <div class="menu-item"><span class="item-name">Lemon Tea</span><span class="item-price">₹30</span></div>
+                <div class="menu-item"><span class="item-name">Green Tea</span><span class="item-price">₹30</span></div>
+                <div class="menu-item"><span class="item-name">Black Coffee</span><span class="item-price">₹30</span></div>
+                <div class="menu-item"><span class="item-name">Coffee</span><span class="item-price">₹40</span></div>
+            </div>
+        </div>
+
+        <!-- Summer Coolers -->
+        <div class="menu-category">
+            <h3>🧊 Summer Coolers</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><span class="item-name">Fresh Lime Water</span><span class="item-price">₹50</span></div>
+                <div class="menu-item"><span class="item-name">Fresh Lime Soda</span><span class="item-price">₹70</span></div>
+                <div class="menu-item"><span class="item-name">Lassi</span><span class="item-price">₹70</span></div>
+                <div class="menu-item"><span class="item-name">Cold Coffee</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Chocolate Shake</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Strawberry Shake</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Mango Shake</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Banana Shake</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Oreo Shake</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Lemon Ice Tea</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Peach Ice Tea</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Green Apple</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Blue Lagoon</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Virgin Mojito</span><span class="item-price">₹100</span></div>
+                <div class="menu-item"><span class="item-name">Ice Creams</span><span class="item-price">MRP</span></div>
+                <div class="menu-item"><span class="item-name">Soft Drinks / Water</span><span class="item-price">MRP</span></div>
+            </div>
+        </div>
+
+        <!-- Snacks -->
+        <div class="menu-category">
+            <h3>🍟 Snacks</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><span class="item-name">Samosa</span><span class="item-price">₹20</span></div>
+                <div class="menu-item"><span class="item-name">Bread Pakora</span><span class="item-price">₹30</span></div>
+                <div class="menu-item"><span class="item-name">Aloo Patties</span><span class="item-price">₹30</span></div>
+                <div class="menu-item"><span class="item-name">Paneer Patties</span><span class="item-price">₹50</span></div>
+                <div class="menu-item"><span class="item-name">Plain Maggi</span><span class="item-price">₹40</span></div>
+                <div class="menu-item"><span class="item-name">Veg Maggi</span><span class="item-price">₹60</span></div>
+                <div class="menu-item"><span class="item-name">Bun Maskaa</span><span class="item-price">₹50</span></div>
+                <div class="menu-item"><span class="item-name">Bun Omelette</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Veg Burger</span><span class="item-price">₹70</span></div>
+                <div class="menu-item"><span class="item-name">Cheese Burger</span><span class="item-price">₹90</span></div>
+                <div class="menu-item"><span class="item-name">Veg Sandwich</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Grilled Sandwich</span><span class="item-price">₹100</span></div>
+                <div class="menu-item"><span class="item-name">Pasta (White / Red Sauce)</span><span class="item-price">₹150</span></div>
+            </div>
+        </div>
+
+        <!-- Chinese -->
+        <div class="menu-category">
+            <h3>🍜 Chinese</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><span class="item-name">Veg Chowmein (Half)</span><span class="item-price">₹50</span></div>
+                <div class="menu-item"><span class="item-name">Veg Chowmein (Full)</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Egg Chowmein (Half)</span><span class="item-price">₹70</span></div>
+                <div class="menu-item"><span class="item-name">Egg Chowmein (Full)</span><span class="item-price">₹130</span></div>
+                <div class="menu-item"><span class="item-name">Chicken Chowmein (Half)</span><span class="item-price">₹100</span></div>
+                <div class="menu-item"><span class="item-name">Chicken Chowmein (Full)</span><span class="item-price">₹180</span></div>
+                <div class="menu-item"><span class="item-name">French Fries</span><span class="item-price">₹100</span></div>
+                <div class="menu-item"><span class="item-name">Honey Chilli Potato</span><span class="item-price">₹150</span></div>
+                <div class="menu-item"><span class="item-name">Veg Momo (8 pcs)</span><span class="item-price">₹80</span></div>
+                <div class="menu-item"><span class="item-name">Chicken Momo (8 pcs)</span><span class="item-price">₹130</span></div>
+                <div class="menu-item"><span class="item-name">Spring Roll</span><span class="item-price">₹150</span></div>
+                <div class="menu-item"><span class="item-name">Veg Fried Rice</span><span class="item-price">₹120</span></div>
+                <div class="menu-item"><span class="item-name">Egg Fried Rice</span><span class="item-price">₹150</span></div>
+                <div class="menu-item"><span class="item-name">Chicken Fried Rice</span><span class="item-price">₹180</span></div>
+            </div
